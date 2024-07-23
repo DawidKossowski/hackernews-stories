@@ -1,4 +1,4 @@
-export async function POST( request ) {
+export async function POST ( request ) {
     const formData = await request.json();
 
     console.log( 'Form data received:', formData );

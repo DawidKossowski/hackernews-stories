@@ -22,7 +22,7 @@ const StoryPage = async ( { params: { id } } ) => {
                     <a
                         href={ story.url }
                         className="text-blue-500 hover:underline ml-1 break-words"
-                        aria-label={`Visit the story: ${story.title}`}
+                        aria-label={ `Visit the story: ${story.title}` }
                     >
                         { story.url }
                     </a>

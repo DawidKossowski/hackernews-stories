@@ -16,20 +16,20 @@ const FeedbackPage = () => {
         setSuccess( false );
 
         if ( !name || !email || !feedback ) {
-            setError('Please fill out all fields.');
+            setError( 'Please fill out all fields.' );
 
             return;
         }
 
         if ( !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test( email ) ) {
-            setError('Invalid email address.');
+            setError( 'Invalid email address.' );
 
             return;
         }
 
         const formData = { name, email, feedback };
 
-        await fetch('api/submit-form', {
+        await fetch( 'api/submit-form', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',

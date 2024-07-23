@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import { fetchTopStories } from "@/app/utils/fetchTopStories";
 
-export default async function Home() {
+export default async function Home () {
     const stories = await fetchTopStories();
 
     return (
