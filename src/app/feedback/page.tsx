@@ -21,12 +21,6 @@ const FeedbackPage = () => {
 		setError( '' );
 		setSuccess( false );
 
-		if ( !name || !email || !feedback ) {
-			setError( 'Please fill out all fields.' );
-
-			return;
-		}
-
 		if ( !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test( email ) ) {
 			setError( 'Invalid email address.' );
 
@@ -78,33 +72,33 @@ const FeedbackPage = () => {
 			</div>
 
 			<form onSubmit={ handleSubmit } className="space-y-4">
-				<div>
-					<Input
-						id="name"
-						label="Name"
-						value={name}
-						onChange={ e => setName( e.target.value )}
-						aria-required="true"
-					/>
-				</div>
-				<div>
-					<Input
-						id="email"
-						label="Email"
-						value={email}
-						onChange={ e => setEmail( e.target.value )}
-						aria-required="true"
-					/>
-				</div>
-				<div>
-					<Textarea
-						id="feedback"
-						label="Feedback"
-						value={feedback}
-						onChange={ e => setFeedback( e.target.value )}
-						aria-required="true"
-					/>
-				</div>
+				<Input
+					id="name"
+					label="Name"
+					value={name}
+					onChange={ e => setName( e.target.value )}
+					required
+					aria-required="true"
+				/>
+
+				<Input
+					id="email"
+					label="Email"
+					value={email}
+					onChange={ e => setEmail( e.target.value )}
+					required
+					aria-required="true"
+				/>
+
+				<Textarea
+					id="feedback"
+					label="Feedback"
+					value={feedback}
+					onChange={ e => setFeedback( e.target.value )}
+					required
+					aria-required="true"
+				/>
+
 				<Button type="submit">Submit</Button>
 			</form>
 		</Container>
