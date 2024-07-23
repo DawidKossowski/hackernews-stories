@@ -1,16 +1,13 @@
 import { cache } from 'react'
 import { Comment } from "@/model/comment";
+import { http } from "@/app/lib/api/http";
 
 export const fetchComments = cache( async ( ids?: number[] ): Promise<Comment[]> => {
-	if ( !ids ) {
+	if ( !ids || !ids.length ) {
 		return [];
 	}
 
 	return await Promise.all(
-		ids.map( async ( id ) => {
-			const response = await fetch( `https://hacker-news.firebaseio.com/v0/item/${id}.json` );
-
-			return response.json();
-		} )
+		ids.map( async ( id ) => http.get<Comment>( `https://hacker-news.firebaseio.com/v0/item/${id}.json` ) )
 	);
 } );

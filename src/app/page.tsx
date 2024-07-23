@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { fetchTopStories } from "@/app/utils/fetchTopStories";
+import { fetchTopStories } from "@/app/lib/api/fetchTopStories";
 import Container from "@/app/components/Container";
 import Header, { HeaderLevel } from "@/app/components/Header";
 import Text from "@/app/components/Text";

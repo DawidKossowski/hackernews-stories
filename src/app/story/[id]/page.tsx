@@ -1,6 +1,6 @@
 import React from 'react';
-import { fetchStory } from "@/app/utils/fetchStory";
-import { fetchComments } from "@/app/utils/fetchComments";
+import { fetchStory } from "@/app/lib/api/fetchStory";
+import { fetchComments } from "@/app/lib/api/fetchComments";
 import parse from 'html-react-parser';
 import Container from "@/app/components/Container";
 import Header, { HeaderLevel } from "@/app/components/Header";

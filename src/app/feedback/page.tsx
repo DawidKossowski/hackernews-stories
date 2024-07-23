@@ -8,6 +8,7 @@ import Container from "@/app/components/Container";
 import Text, { TextType } from "@/app/components/Text";
 import Header, { HeaderLevel } from "@/app/components/Header";
 import { validateEmail } from "@/app/lib/utils/validateEmail";
+import { http } from "@/app/lib/api/http";
 
 const FeedbackPage = () => {
 	const [ name, setName ] = useState( '' );
@@ -30,13 +31,7 @@ const FeedbackPage = () => {
 
 		const formData = { name, email, feedback };
 
-		await fetch( 'api/submit-form', {
-			method: 'POST',
-			headers: {
-				'Content-Type': 'application/json',
-			},
-			body: JSON.stringify( formData ),
-		} );
+		await http.post<unknown>( 'api/submit-form', formData );
 
 		setSuccess( true );
 		setName( '' );
