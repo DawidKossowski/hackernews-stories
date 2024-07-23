@@ -1,119 +1,114 @@
 'use client'
 
 import React, { useState } from 'react';
+import Input from "@/app/components/Form/Input";
+import Textarea from "@/app/components/Form/Textarea";
+import Button from "@/app/components/Button";
+import Container from "@/app/components/Container";
+import Text, { TextType } from "@/app/components/Text";
+import Header, { HeaderLevel } from "@/app/components/Header";
 
 const FeedbackPage = () => {
-    const [ name, setName ] = useState( '' );
-    const [ email, setEmail ] = useState( '' );
-    const [ feedback, setFeedback ] = useState( '' );
-    const [ success, setSuccess ] = useState( false );
-    const [ error, setError ] = useState( '' );
+	const [ name, setName ] = useState( '' );
+	const [ email, setEmail ] = useState( '' );
+	const [ feedback, setFeedback ] = useState( '' );
+	const [ success, setSuccess ] = useState( false );
+	const [ error, setError ] = useState( '' );
 
-    const handleSubmit = async ( e: React.FormEvent ) => {
-        e.preventDefault();
+	const handleSubmit = async ( e: React.FormEvent ) => {
+		e.preventDefault();
 
-        setError( '' );
-        setSuccess( false );
+		setError( '' );
+		setSuccess( false );
 
-        if ( !name || !email || !feedback ) {
-            setError( 'Please fill out all fields.' );
+		if ( !name || !email || !feedback ) {
+			setError( 'Please fill out all fields.' );
 
-            return;
-        }
+			return;
+		}
 
-        if ( !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test( email ) ) {
-            setError( 'Invalid email address.' );
+		if ( !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test( email ) ) {
+			setError( 'Invalid email address.' );
 
-            return;
-        }
+			return;
+		}
 
-        const formData = { name, email, feedback };
+		const formData = { name, email, feedback };
 
-        await fetch( 'api/submit-form', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify( formData ),
-        } );
+		await fetch( 'api/submit-form', {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json',
+			},
+			body: JSON.stringify( formData ),
+		} );
 
-        setSuccess( true );
-        setName( '' );
-        setEmail( '' );
-        setFeedback( '' );
-    };
+		setSuccess( true );
+		setName( '' );
+		setEmail( '' );
+		setFeedback( '' );
+	};
 
-    const renderMessage = () => {
-        if ( success ) {
-            return (
-                <p className="text-green-500 mb-4" aria-live="polite">
+	const renderMessage = () => {
+		if ( success ) {
+			return (
+				<Text type={TextType.Success}>
                     Thank you for your feedback!
-                </p>
-            );
-        }
+				</Text>
+			);
+		}
 
-        if ( error ) {
-            return (
-                <p className="text-red-500 mb-4" aria-live="polite">
-                    { error }
-                </p>
-            );
-        }
+		if ( error ) {
+			return (
+				<Text type={TextType.Error}>
+					{ error }
+				</Text>
+			);
+		}
 
-        return null;
-    };
+		return null;
+	};
 
-    return (
-        <div className="container mx-auto p-4 max-w-3xl">
-            <h1 className="text-2xl font-bold mb-4">Feedback</h1>
+	return (
+		<Container size="small">
+			<Header level={HeaderLevel.H1}>Feedback</Header>
 
-            <div aria-live="polite">
-                { renderMessage() }
-            </div>
+			<div aria-live="polite">
+				{renderMessage()}
+			</div>
 
-            <form onSubmit={ handleSubmit } className="space-y-4">
-                <div>
-                    <label htmlFor="name" className="block text-gray-700">Name</label>
-                    <input
-                        id="name"
-                        type="text"
-                        value={name}
-                        onChange={ e => setName( e.target.value ) }
-                        className="border rounded w-full py-2 px-3"
-                        aria-required="true"
-                    />
-                </div>
-                <div>
-                    <label htmlFor="email" className="block text-gray-700">Email</label>
-                    <input
-                        id="email"
-                        type="email"
-                        value={email}
-                        onChange={ e => setEmail( e.target.value ) }
-                        className="border rounded w-full py-2 px-3"
-                        aria-required="true"
-                    />
-                </div>
-                <div>
-                    <label htmlFor="feedback" className="block text-gray-700">Feedback</label>
-                    <textarea
-                        id="feedback"
-                        value={feedback}
-                        onChange={ e => setFeedback( e.target.value ) }
-                        className="border rounded w-full py-2 px-3"
-                        aria-required="true"
-                    />
-                </div>
-                <button
-                    type="submit"
-                    className="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600"
-                    aria-label="Submit feedback"
-                >
-                    Submit
-                </button>
-            </form>
-        </div>
-    );
+			<form onSubmit={ handleSubmit } className="space-y-4">
+				<div>
+					<Input
+						id="name"
+						label="Name"
+						value={name}
+						onChange={ e => setName( e.target.value )}
+						aria-required="true"
+					/>
+				</div>
+				<div>
+					<Input
+						id="email"
+						label="Email"
+						value={email}
+						onChange={ e => setEmail( e.target.value )}
+						aria-required="true"
+					/>
+				</div>
+				<div>
+					<Textarea
+						id="feedback"
+						label="Feedback"
+						value={feedback}
+						onChange={ e => setFeedback( e.target.value )}
+						aria-required="true"
+					/>
+				</div>
+				<Button type="submit">Submit</Button>
+			</form>
+		</Container>
+	);
 };
 
 export default FeedbackPage;

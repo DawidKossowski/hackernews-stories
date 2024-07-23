@@ -1,5 +1,8 @@
 {
-  "extends": "next/core-web-vitals",
+  "extends": [
+    "next/core-web-vitals",
+    "eslint:recommended"
+  ],
   "rules": {
     "object-curly-spacing": ["error", "always"],
     "array-bracket-spacing": ["error", "always"],
@@ -8,6 +11,8 @@
       "named": "always",
       "asyncArrow": "always"
     }],
-    "space-in-parens": ["error", "always"]
+    "space-in-parens": ["error", "always"],
+    "no-unused-vars": "off",
+    "indent": ["error", "tab"]
   }
 }

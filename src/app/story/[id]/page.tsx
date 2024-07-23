@@ -2,54 +2,68 @@ import React from 'react';
 import { fetchStory } from "@/app/utils/fetchStory";
 import { fetchComments } from "@/app/utils/fetchComments";
 import parse from 'html-react-parser';
+import Container from "@/app/components/Container";
+import Header, { HeaderLevel } from "@/app/components/Header";
+import Text from "@/app/components/Text";
 
 const StoryPage = async ( { params: { id } } ) => {
-    const story = await fetchStory( id );
-    const comments = await fetchComments( story.kids );
+	const story = await fetchStory( id );
+	const comments = await fetchComments( story.kids );
 
-    return (
-        <div className="container mx-auto p-4 max-w-3xl">
-            <div className="mx-auto">
-                <h1 className="text-3xl font-bold mb-4">{ story.title }</h1>
-                <p className="text-gray-600 mb-2">
-                    By: <span className="font-medium">{ story.by }</span>
-                </p>
-                <p className="text-gray-600 mb-2">
-                    Score: <span className="font-medium">{ story.score }</span>
-                </p>
-                <p className="text-gray-600 mb-2">
+	return (
+		<Container size="small">
+			<div className="mx-auto">
+				<Header level={HeaderLevel.H1}>{story.title}</Header>
+				<Text>
+                    By: <span className="font-medium">{story.by}</span>
+				</Text>
+				<Text>
+                    Score: <span className="font-medium">{story.score}</span>
+				</Text>
+				<Text>
                     URL:
-                    <a
-                        href={ story.url }
-                        className="text-blue-500 hover:underline ml-1 break-words"
-                        aria-label={ `Visit the story: ${story.title}` }
-                    >
-                        { story.url }
-                    </a>
-                </p>
-            </div>
+					<a
+						href={story.url}
+						className="text-blue-500 hover:underline ml-1 break-words"
+						aria-label={`Visit the story: ${story.title}`}
+					>
+						{story.url}
+					</a>
+				</Text>
+			</div>
 
-            <section className="mx-auto mt-6" aria-labelledby="comments-title">
-                <h2 id="comments-title" className="text-2xl font-bold mb-4">Comments</h2>
-                <ul className="space-y-4">
-                    { comments.map( comment => comment.text && (
-                        <li
-                            key={ comment.id }
-                            className="p-4 border rounded-lg shadow"
-                            role="article"
-                            tabIndex={0}
-                        >
-                            <p className="text-gray-600 mb-2">By: <span className="font-medium">{ comment.by }</span></p>
-                            <hr className="h-px my-2 bg-gray-200 border-0" />
-                            <div className="text-gray-800 overflow-x-auto">
-                                { parse( comment.text ) }
-                            </div>
-                        </li>
-                    ) ) }
-                </ul>
-            </section>
-        </div>
-    );
+			<section className="mx-auto mt-6" aria-labelledby="comments-title">
+				<Header level={HeaderLevel.H2} id="comments-title">Comments</Header>
+				{
+					comments.length ? (
+						<ul className="space-y-4">
+							{ comments.map( comment => comment.text && (
+								<li
+									key={comment.id}
+									className="p-4 border rounded-lg shadow"
+									role="article"
+									tabIndex={ 0 }
+								>
+									<Text>
+									By: <span className="font-medium">{comment.by}</span>
+									</Text>
+
+									<hr className="h-px my-2 bg-gray-200 border-0" />
+
+									<div className="text-gray-800 overflow-x-auto">
+										{parse( comment.text )}
+									</div>
+								</li>
+							) ) }
+						</ul>
+					) : (
+						<Text>There are no comments yet.</Text>
+					)
+				}
+
+			</section>
+		</Container>
+	);
 };
 
 export default StoryPage;
