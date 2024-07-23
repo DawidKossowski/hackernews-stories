@@ -8,14 +8,14 @@ interface TextareaProps extends React.TextareaHTMLAttributes<HTMLTextAreaElement
 
 const Textarea: React.FC<TextareaProps> = ( { label, id, ...rest } ) => {
 	return (
-		<div>
+		<>
 			<Label htmlFor={id}>{label}</Label>
 			<textarea
 				id={id}
 				className="border rounded w-full py-2 px-3"
 				{...rest}
 			/>
-		</div>
+		</>
 	);
 };
 
