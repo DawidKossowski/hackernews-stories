@@ -1,9 +1,8 @@
-import { cache } from 'react'
 import { Story } from "@/model/story";
 import { http } from "@/app/lib/api/http";
 import { fetchStory } from "@/app/lib/api/fetchStory";
 
-export const fetchTopStories = cache( async (): Promise<Story[]> => {
+export const fetchTopStories = async (): Promise<Story[]> => {
 	const storyIds = await http.get<number[]>( 'https://hacker-news.firebaseio.com/v0/topstories.json', 'print=pretty' );
 
 	return await Promise.all(
@@ -11,4 +10,4 @@ export const fetchTopStories = cache( async (): Promise<Story[]> => {
 			return await fetchStory( id );
 		} )
 	);
-} );
+};

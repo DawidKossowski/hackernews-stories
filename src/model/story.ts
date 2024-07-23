@@ -5,5 +5,6 @@ export interface Story {
     by: string;
     score: number;
     time: number;
+    url: string;
     kids?: number[];
 }

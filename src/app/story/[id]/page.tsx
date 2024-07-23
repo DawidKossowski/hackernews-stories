@@ -6,7 +6,7 @@ import Container from "@/app/components/Container";
 import Header, { HeaderLevel } from "@/app/components/Header";
 import Text from "@/app/components/Text";
 
-const StoryPage = async ( { params: { id } } ) => {
+const StoryPage = async ( { params: { id } }: { params: { id: number } } ) => {
 	const story = await fetchStory( id );
 	const comments = await fetchComments( story.kids );
 

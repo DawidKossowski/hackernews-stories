@@ -1,4 +1,4 @@
-import React, { HTMLAttributes } from 'react';
+import React, { HTMLAttributes, JSX } from 'react';
 
 export enum HeaderLevel {
     H1 = 1,
@@ -15,7 +15,7 @@ interface HeaderProps extends HTMLAttributes<HTMLHeadingElement> {
 }
 
 const Header: React.FC<HeaderProps> = ( { level, children, ...rest } ) => {
-	const Tag = `h${level}`;
+	const Tag = `h${level}` as JSX.IntrinsicAttributes;
 
 	const baseClasses = {
 		[HeaderLevel.H1]: 'text-2xl font-bold mb-4',
@@ -23,6 +23,7 @@ const Header: React.FC<HeaderProps> = ( { level, children, ...rest } ) => {
 	};
 
 	return (
+		// @ts-ignore
 		<Tag className={baseClasses[ level ]} {...rest}>
 			{children}
 		</Tag>
