@@ -7,6 +7,7 @@ import Button from "@/app/components/Button";
 import Container from "@/app/components/Container";
 import Text, { TextType } from "@/app/components/Text";
 import Header, { HeaderLevel } from "@/app/components/Header";
+import { validateEmail } from "@/app/lib/utils/validateEmail";
 
 const FeedbackPage = () => {
 	const [ name, setName ] = useState( '' );
@@ -21,7 +22,7 @@ const FeedbackPage = () => {
 		setError( '' );
 		setSuccess( false );
 
-		if ( !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test( email ) ) {
+		if ( !validateEmail( email ) ) {
 			setError( 'Invalid email address.' );
 
 			return;
@@ -71,12 +72,12 @@ const FeedbackPage = () => {
 				{renderMessage()}
 			</div>
 
-			<form onSubmit={ handleSubmit } className="space-y-4">
+			<form onSubmit={handleSubmit} className="space-y-4">
 				<Input
 					id="name"
 					label="Name"
 					value={name}
-					onChange={ e => setName( e.target.value )}
+					onChange={e => setName( e.target.value )}
 					required
 					aria-required="true"
 				/>
@@ -85,7 +86,7 @@ const FeedbackPage = () => {
 					id="email"
 					label="Email"
 					value={email}
-					onChange={ e => setEmail( e.target.value )}
+					onChange={e => setEmail( e.target.value )}
 					required
 					aria-required="true"
 				/>
@@ -94,7 +95,7 @@ const FeedbackPage = () => {
 					id="feedback"
 					label="Feedback"
 					value={feedback}
-					onChange={ e => setFeedback( e.target.value )}
+					onChange={e => setFeedback( e.target.value )}
 					required
 					aria-required="true"
 				/>
