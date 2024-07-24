@@ -45,7 +45,7 @@ const StoryPage = async ( { params: { id } }: { params: { id: number } } ) => {
 									tabIndex={ 0 }
 								>
 									<Text>
-									By: <span className="font-medium">{comment.by}</span>
+										By: <span className="font-medium">{comment.by}</span>
 									</Text>
 
 									<hr className="h-px my-2 bg-gray-200 border-0" />

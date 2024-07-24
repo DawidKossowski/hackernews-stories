@@ -29,7 +29,7 @@ describe( 'FeedbackPage Component', () => {
 
 		fireEvent.change( screen.getByLabelText( 'Name' ), { target: { value: 'John Doe' } } );
 		fireEvent.change( screen.getByLabelText( 'Feedback' ), { target: { value: 'Bad job...' } } );
-		fireEvent.change( screen.getByLabelText( 'Email' ), { target: { value: 'invalid-email' } } );
+		fireEvent.change( screen.getByLabelText( 'Email' ), { target: { value: 'invalid-email@11.11' } } );
 		fireEvent.click( screen.getByRole( 'button', { name: /submit/i } ) );
 
 		await waitFor( () => {

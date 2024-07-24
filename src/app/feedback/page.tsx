@@ -71,6 +71,7 @@ const FeedbackPage = () => {
 				<Input
 					id="name"
 					label="Name"
+					type="text"
 					value={name}
 					onChange={e => setName( e.target.value )}
 					required
@@ -80,6 +81,7 @@ const FeedbackPage = () => {
 				<Input
 					id="email"
 					label="Email"
+					type="email"
 					value={email}
 					onChange={e => setEmail( e.target.value )}
 					required
