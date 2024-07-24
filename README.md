@@ -3,11 +3,7 @@
 ## Prerequisites
 
 - **Node.js**: Make sure Node.js is installed. You can download it from [nodejs.org](https://nodejs.org/).
-- **npm**: npm is included with Node.js. You can install yarn globally using npm if you prefer.
-
-    ```bash
-    npm install -g yarn
-    ```
+- **npm**: npm is included with Node.js.
 
 ## Installation
 
@@ -22,7 +18,7 @@
 
 2. **Install Dependencies**
 
-   Install the required dependencies using npm or yarn.
+   Install the required dependencies using npm.
 
     ```bash
     npm install
